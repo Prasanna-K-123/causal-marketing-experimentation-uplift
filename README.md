@@ -26,7 +26,7 @@ Observed post-treatment outcomes include:
 
 Pre-treatment features include recency, purchase history, prior men's/women's merchandise behavior, new-customer status, ZIP category, and channel.
 
-The notebook attempts the original author-hosted data URL first and uses a mirror only if that source is unavailable.
+The reproducible analysis pipeline attempts the original author-hosted data URL first and uses a mirror only if that source is unavailable.
 
 ### Data-integrity choice
 
@@ -144,8 +144,9 @@ Keeping this failure is deliberate: the project separates a successful visit-upl
 ```text
 .
 ├── README.md
-├── causal_marketing_experimentation_uplift.ipynb
 ├── requirements.txt
+├── src/
+│   └── causal_experimentation_uplift.py
 └── results/
     ├── experiment_arm_outcomes.csv
     ├── randomization_balance.csv
