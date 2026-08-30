@@ -158,6 +158,14 @@ Keeping this failure is deliberate: the project separates a successful visit-upl
     └── final_project6_metrics.csv
 ```
 
+
+## Reproduce
+
+1. Install the packages in `requirements.txt`.
+2. Run `python src/causal_experimentation_uplift.py` from the repository root.
+3. The script downloads the public Hillstrom experiment, reruns the balance and treatment-effect analysis, retrains the validation-selected T-learner, and regenerates every published CSV in `results/`.
+4. Because all splits and bootstrap seeds are fixed, the regenerated metrics should match the committed results apart from negligible package-level numerical variation.
+
 ## What this project demonstrates
 
 - randomized experimentation and causal interpretation;
