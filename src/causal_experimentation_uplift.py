@@ -341,7 +341,69 @@ def main():
         },
     ])
 
-    output_dir = Path("project6_outputs")
+    # Summarize untouched-test performance by predicted-uplift decile.
+    final_scored["decile"] = (
+        np.floor(np.arange(len(final_scored)) * 10 / len(final_scored))
+        .astype(int)
+        + 1
+    )
+    decile_rows = []
+    for decile, group in final_scored.groupby("decile", sort=True):
+        treated_group = group[group["treatment"] == 1]
+        control_group = group[group["treatment"] == 0]
+        decile_rows.append({
+            "decile": int(decile),
+            "customers": len(group),
+            "treated_customers": len(treated_group),
+            "control_customers": len(control_group),
+            "avg_predicted_uplift": group["predicted_uplift"].mean(),
+            "treated_visit_rate": treated_group["visit"].mean(),
+            "control_visit_rate": control_group["visit"].mean(),
+            "empirical_visit_lift": empirical_effect(group, "visit"),
+            "empirical_spend_lift": empirical_effect(group, "spend"),
+        })
+    decile_summary = pd.DataFrame(decile_rows)
+
+    def ate_value(treatment, outcome):
+        return float(
+            ate.loc[
+                (ate["treatment"] == treatment) & (ate["outcome"] == outcome),
+                "absolute_effect",
+            ].iloc[0]
+        )
+
+    project_metrics = pd.DataFrame([
+        {"metric": "customers", "value": len(df)},
+        {"metric": "max_absolute_randomization_smd", "value": balance["abs_smd"].max()},
+        {
+            "metric": "holm_significant_effects_out_of_6",
+            "value": int(ate["significant_after_holm"].sum()),
+        },
+        {"metric": "mens_email_visit_effect", "value": ate_value("Mens E-Mail", "visit")},
+        {"metric": "mens_email_conversion_effect", "value": ate_value("Mens E-Mail", "conversion")},
+        {"metric": "mens_email_spend_effect", "value": ate_value("Mens E-Mail", "spend")},
+        {"metric": "womens_email_visit_effect", "value": ate_value("Womens E-Mail", "visit")},
+        {"metric": "womens_email_conversion_effect", "value": ate_value("Womens E-Mail", "conversion")},
+        {"metric": "womens_email_spend_effect", "value": ate_value("Womens E-Mail", "spend")},
+        {"metric": "final_test_top30_visit_lift", "value": empirical_effect(top30, "visit")},
+        {"metric": "final_test_bottom70_visit_lift", "value": empirical_effect(bottom70, "visit")},
+        {
+            "metric": "final_test_top_minus_bottom_visit",
+            "value": empirical_effect(top30, "visit") - empirical_effect(bottom70, "visit"),
+        },
+        {"metric": "final_test_visit_difference_ci_low", "value": np.quantile(visit_diff, 0.025)},
+        {"metric": "final_test_visit_difference_ci_high", "value": np.quantile(visit_diff, 0.975)},
+        {"metric": "probability_top30_visit_exceeds_bottom70", "value": (visit_diff > 0).mean()},
+        {
+            "metric": "final_test_top_minus_bottom_spend",
+            "value": empirical_effect(top30, "spend") - empirical_effect(bottom70, "spend"),
+        },
+        {"metric": "final_test_spend_difference_ci_low", "value": np.quantile(spend_diff, 0.025)},
+        {"metric": "final_test_spend_difference_ci_high", "value": np.quantile(spend_diff, 0.975)},
+        {"metric": "probability_top30_spend_exceeds_bottom70", "value": (spend_diff > 0).mean()},
+    ])
+
+    output_dir = Path("results")
     output_dir.mkdir(exist_ok=True)
     arm_outcomes.to_csv(output_dir / "experiment_arm_outcomes.csv", index=False)
     balance.to_csv(output_dir / "randomization_balance.csv", index=False)
@@ -349,6 +411,8 @@ def main():
     bootstrap.to_csv(output_dir / "bootstrap_treatment_effects.csv", index=False)
     validation_comparison.to_csv(output_dir / "uplift_model_validation.csv", index=False)
     final_policy.to_csv(output_dir / "final_test_policy_bootstrap.csv", index=False)
+    decile_summary.to_csv(output_dir / "final_test_uplift_deciles.csv", index=False)
+    project_metrics.to_csv(output_dir / "final_project6_metrics.csv", index=False)
 
     print("\nFinal policy metrics:")
     print(final_policy.to_string(index=False))
