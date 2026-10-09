@@ -1,0 +1,27 @@
+{
+  "test_deciles_sha256": "a40a4b8ff8858e4ea6ea4936e877ab70c31370951515b44893fb6e9fb11478f9",
+  "test_rows": 12800,
+  "fixed_budget": 0.3,
+  "top_visit_effect": 0.08283799349699394,
+  "bottom_visit_effect": 0.03780403961730179,
+  "targeted_incremental_visits_per_customer": 0.024851398049098184,
+  "random_same_budget_incremental_visits_per_customer": 0.01539426773436283,
+  "targeted_minus_random_same_budget": 0.009457130314735352,
+  "artifacts_reconcile": false,
+  "saved_policy_effects": [
+    0.0829284173588463,
+    0.0376133364186843
+  ],
+  "artifact_point_differences": [
+    -9.042386185235951e-05,
+    0.0001907031986174909
+  ],
+  "conditional_bootstrap_ci95": null,
+  "interpretation": "Per entire eligible customer population, versus randomized targeting at the same 30% email budget.",
+  "caveats": [
+    "Conditional bootstrap interval from frozen ranked segments; no model-refit uncertainty.",
+    "No validated spend heterogeneity, revenue, profit or ROI improvement.",
+    "Published holdout: future experiments need a fresh locked test set.",
+    "If artifacts do not reconcile, withhold a confidence interval and regenerate all outputs together."
+  ]
+}

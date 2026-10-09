@@ -1,0 +1,35 @@
+name: Reproduce randomized experiment evidence
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt pytest==8.3.3
+      - run: python -m pytest -q
+      - run: python src/causal_experimentation_uplift.py
+      - run: python audit_policy.py
+      - name: Verify and emit compact reference evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary=json.loads(Path('results/same_budget_policy_audit.json').read_text())
+          assert summary['artifacts_reconcile'], 'Policy and decile evidence must reconcile'
+          files={str(p):p.read_text() for p in Path('results').glob('*') if p.suffix in {'.csv','.json'} and p.name!='final_test_predictions.csv'}
+          print('CAUSAL_REFERENCE_JSON='+json.dumps(files))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: causal-reference-evidence
+          path: results/

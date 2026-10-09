@@ -2,6 +2,8 @@
 """Causal marketing experimentation + uplift modeling on the Hillstrom dataset."""
 
 import io
+import json
+import hashlib
 from itertools import combinations
 from pathlib import Path
 
@@ -51,6 +53,14 @@ def load_hillstrom():
                 df = pd.read_csv(io.BytesIO(r.content))
             if len(df) >= 60000:
                 print(f"Loaded {len(df):,} rows from {label} source.")
+                Path('results').mkdir(exist_ok=True)
+                import sklearn, scipy
+                metadata = dict(source_label=label,source_url=url,
+                                payload_sha256=hashlib.sha256(r.content).hexdigest(),
+                                parsed_rows_sha256=hashlib.sha256(pd.util.hash_pandas_object(df,index=False).values.tobytes()).hexdigest(),
+                                rows=len(df),numpy_version=np.__version__,pandas_version=pd.__version__,
+                                sklearn_version=sklearn.__version__,scipy_version=scipy.__version__)
+                Path('results/run_metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
                 return df
         except Exception as exc:
             errors.append((label, repr(exc)))
@@ -393,14 +403,14 @@ def main():
         },
         {"metric": "final_test_visit_difference_ci_low", "value": np.quantile(visit_diff, 0.025)},
         {"metric": "final_test_visit_difference_ci_high", "value": np.quantile(visit_diff, 0.975)},
-        {"metric": "probability_top30_visit_exceeds_bottom70", "value": (visit_diff > 0).mean()},
+        {"metric": "bootstrap_fraction_top30_visit_exceeds_bottom70", "value": (visit_diff > 0).mean()},
         {
             "metric": "final_test_top_minus_bottom_spend",
             "value": empirical_effect(top30, "spend") - empirical_effect(bottom70, "spend"),
         },
         {"metric": "final_test_spend_difference_ci_low", "value": np.quantile(spend_diff, 0.025)},
         {"metric": "final_test_spend_difference_ci_high", "value": np.quantile(spend_diff, 0.975)},
-        {"metric": "probability_top30_spend_exceeds_bottom70", "value": (spend_diff > 0).mean()},
+        {"metric": "bootstrap_fraction_top30_spend_exceeds_bottom70", "value": (spend_diff > 0).mean()},
     ])
 
     output_dir = Path("results")
@@ -413,15 +423,16 @@ def main():
     final_policy.to_csv(output_dir / "final_test_policy_bootstrap.csv", index=False)
     decile_summary.to_csv(output_dir / "final_test_uplift_deciles.csv", index=False)
     project_metrics.to_csv(output_dir / "final_project6_metrics.csv", index=False)
+    final_scored[['treatment','visit','conversion','spend','predicted_uplift','decile']].to_csv(output_dir / 'final_test_predictions.csv',index=False)
 
     print("\nFinal policy metrics:")
     print(final_policy.to_string(index=False))
     print(
-        "\nProbability top-30% visit uplift > bottom-70%:",
+        "\nBootstrap fraction top-30% visit uplift > bottom-70%:",
         round((visit_diff > 0).mean(), 4),
     )
     print(
-        "Probability top-30% spend uplift > bottom-70%:",
+        "Bootstrap fraction top-30% spend uplift > bottom-70%:",
         round((spend_diff > 0).mean(), 4),
     )
 
