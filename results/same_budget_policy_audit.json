@@ -1,5 +1,5 @@
 {
-  "test_deciles_sha256": "a40a4b8ff8858e4ea6ea4936e877ab70c31370951515b44893fb6e9fb11478f9",
+  "test_deciles_sha256": "8ee5d2aa452fbc26dd3f436eb6d6edd76fddaf21a3c733466c79fc073da6e635",
   "test_rows": 12800,
   "fixed_budget": 0.3,
   "top_visit_effect": 0.08283799349699394,
@@ -7,16 +7,19 @@
   "targeted_incremental_visits_per_customer": 0.024851398049098184,
   "random_same_budget_incremental_visits_per_customer": 0.01539426773436283,
   "targeted_minus_random_same_budget": 0.009457130314735352,
-  "artifacts_reconcile": false,
+  "artifacts_reconcile": true,
   "saved_policy_effects": [
-    0.0829284173588463,
-    0.0376133364186843
+    0.0828379934969939,
+    0.0378040396173017
   ],
   "artifact_point_differences": [
-    -9.042386185235951e-05,
-    0.0001907031986174909
+    4.163336342344337e-17,
+    9.020562075079397e-17
   ],
-  "conditional_bootstrap_ci95": null,
+  "conditional_bootstrap_ci95": [
+    0.003328502827794921,
+    0.015608681023870703
+  ],
   "interpretation": "Per entire eligible customer population, versus randomized targeting at the same 30% email budget.",
   "caveats": [
     "Conditional bootstrap interval from frozen ranked segments; no model-refit uncertainty.",

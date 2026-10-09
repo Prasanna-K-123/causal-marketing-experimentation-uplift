@@ -1,0 +1,12 @@
+{
+  "source_label": "fallback",
+  "source_url": "https://hillstorm1.s3.us-east-2.amazonaws.com/hillstorm_no_indices.csv.gz",
+  "payload_sha256": "bab6578f60db5d792f1c2372c502f029152a5249cf5ea84390f3b7f885d7234f",
+  "parsed_rows_sha256": "f57d0ec295edfe413cc5ffe7d32fe7443d839cbfaefb4babacc7f80febe96bae",
+  "rows": 64000,
+  "numpy_version": "2.5.3",
+  "pandas_version": "3.0.6",
+  "sklearn_version": "1.9.1",
+  "scipy_version": "1.18.1"
+}
+

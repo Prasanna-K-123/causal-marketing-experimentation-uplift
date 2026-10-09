@@ -1,188 +1,39 @@
-# Causal Marketing Experimentation, Bootstrapping & Uplift Modeling
+# Causal Decision Science — Randomized Experiments & Targeting
 
-Independent portfolio project using the **Hillstrom 64,000-customer randomized email experiment**.
+Independent research using Hillstrom’s public 64,000-customer randomized email experiment. This release reproduces all outputs together, records data/environment identity and reconciles policy summaries to decile aggregates.
 
-## Objective
+**Review:** [Policy audit](results/same_budget_policy_audit.json) · [Bootstrap effects](results/final_test_policy_bootstrap.csv) · [Source/environment identity](results/run_metadata.json) · [Full CI reproduction](https://github.com/Prasanna-K-123/causal-marketing-experimentation-uplift/actions/runs/37962514536) · [Evidence review](docs/EVIDENCE_REVIEW.md)
 
-Separate three questions that are often incorrectly mixed together:
+## Experimental design
 
-1. **Average causal effect:** did the email campaigns cause incremental visits, conversions, and spend?
-2. **Uncertainty:** how precise are those effect estimates?
-3. **Heterogeneity:** can pre-treatment customer features identify a segment with stronger incremental visit response?
+Customers were randomized between men’s email, women’s email and no-email control. Visit, conversion and spend outcomes are analysed separately. Exact duplicate rows remain because there is no customer identifier that justifies deduplication. Pre-treatment balance has maximum absolute SMD 0.0086.
 
-## Dataset
+All six email-versus-control average-effect tests remain significant after Holm correction. Each average effect uses 5,000 bootstrap resamples. The pooled-email targeting stage compares logistic and gradient-boosted T-learners using a fixed 60/20/20 train/validation/evaluation split. The 30% budget and visit outcome are fixed; final evaluation does not choose another budget or model.
 
-The experiment contains **64,000 customers** randomized approximately equally across:
+## Reconciled evaluation
 
-- Men's Email
-- Women's Email
-- No Email control
+| Result | Estimate | Conditional bootstrap 95% interval |
+|---|---:|---:|
+| Top-30% visit effect | 8.284 pp | [5.715, 10.887] pp |
+| Remaining-70% visit effect | 3.780 pp | [2.369, 5.173] pp |
+| Top-minus-bottom visit effect | 4.503 pp | [1.585, 7.433] pp |
+| Same-budget targeting gain versus random 30% targeting | 0.946 pp | [0.333, 1.561] pp |
 
-Observed post-treatment outcomes include:
+The last row measures additional visits across the entire eligible population, not only the contacted group: q(1-q)(tau_top - tau_bottom), with q=0.30. The audit verifies that the saved policy and decile artifacts agree.
 
-- visit
-- conversion
-- spend
-
-Pre-treatment features include recency, purchase history, prior men's/women's merchandise behavior, new-customer status, ZIP category, and channel.
-
-The reproducible analysis pipeline attempts the original author-hosted data URL first and uses a mirror only if that source is unavailable.
-
-### Data-integrity choice
-
-The file contains exact duplicate rows but no unique customer identifier. These rows are **not deduplicated**, because identical observed rows can represent different randomized customers. Removing them without an identifier would alter the experiment without evidence.
-
-## 1. Randomization balance
-
-Pre-treatment numeric/binary covariates were checked using standardized mean differences.
-
-**Maximum absolute SMD: 0.0086**
-
-This is far below the common 0.10 practical-imbalance threshold and supports the integrity of the randomized comparison on the observed covariates.
-
-## 2. Average treatment effects
-
-Each email arm is compared with the no-email control on visit, conversion, and spend.
-
-| Treatment | Outcome | Absolute effect |
-|---|---|---:|
-| Men's Email | Visit | **+7.66 pp** |
-| Men's Email | Conversion | **+0.681 pp** |
-| Men's Email | Spend | **+$0.770/customer** |
-| Women's Email | Visit | **+4.52 pp** |
-| Women's Email | Conversion | **+0.311 pp** |
-| Women's Email | Spend | **+$0.424/customer** |
-
-All **6/6** treatment-vs-control effects remain statistically significant after **Holm family-wise error correction**.
-
-These comparisons support causal interpretation because treatment assignment was randomized.
-
-The project does **not** claim that Men's Email is statistically better than Women's Email; that would require a direct treatment-vs-treatment contrast.
-
-## 3. Bootstrap uncertainty
-
-Each of the six average treatment effects is evaluated with **5,000 bootstrap resamples**.
-
-Examples:
-
-- Men's Email visit effect: **+7.66 pp**, bootstrap 95% CI approximately **[+7.02, +8.33] pp**
-- Men's Email spend effect: **+$0.770/customer**, bootstrap 95% CI approximately **[$0.492, $1.059]**
-- Women's Email visit effect: **+4.52 pp**, bootstrap 95% CI approximately **[+3.88, +5.15] pp**
-
-All six bootstrap intervals remain above zero.
-
-## 4. Uplift modeling design
-
-For the targeting stage, the two email arms are collapsed into:
-
-**any email vs no email**
-
-The pre-selected uplift target is **visit**.
-
-An honest **60 / 20 / 20** train-validation-final-test split is used:
-
-- Train: 38,400
-- Validation: 12,800
-- Untouched final test: 12,800
-
-Two T-learners are compared on validation data:
-
-- logistic T-learner
-- gradient-boosted T-learner
-
-The model-selection criterion is the empirical **top-30% minus bottom-70% visit uplift** on validation.
-
-The logistic T-learner wins the validation comparison and is then frozen.
-
-## 5. Final untouched-test result
-
-After retraining the selected logistic T-learner on train + validation data, the model is evaluated once on the final test set.
-
-| Final-test segment | Randomized visit uplift |
-|---|---:|
-| Top 30% predicted uplift | **+8.29 pp** |
-| Remaining 70% | **+3.76 pp** |
-| Difference | **+4.53 pp** |
-
-Bootstrap validation of the difference:
-
-- **95% CI: [+1.50, +7.52] pp**
-- **Probability top-30% > bottom-70%: 99.9%**
-
-This is evidence of **segment-level treatment-effect heterogeneity** on the untouched final test.
-
-It is not a claim that the model knows each customer's individual causal effect.
-
-## 6. Negative result retained
-
-Spend heterogeneity did **not** validate:
-
-- top-30% minus bottom-70% spend effect: about **-$0.47/customer**
-- bootstrap 95% CI spans zero
-- probability top-30% > bottom-70%: **17.2%**
-
-No spend-targeting, profit, or ROI claim is made.
-
-Keeping this failure is deliberate: the project separates a successful visit-uplift result from an unsupported spend-uplift story.
-
-## Tech stack
-
-- Python
-- Pandas / NumPy
-- SciPy
-- Statsmodels
-- scikit-learn
-- Logistic regression
-- Gradient boosting
-- T-learner uplift modeling
-- bootstrap resampling
-- Holm multiple-testing correction
-- Matplotlib
-
-## Repository structure
-
-```text
-.
-├── README.md
-├── requirements.txt
-├── src/
-│   └── causal_experimentation_uplift.py
-└── results/
-    ├── experiment_arm_outcomes.csv
-    ├── randomization_balance.csv
-    ├── average_treatment_effects.csv
-    ├── bootstrap_treatment_effects.csv
-    ├── uplift_model_validation.csv
-    ├── final_test_uplift_deciles.csv
-    ├── final_test_policy_bootstrap.csv
-    └── final_project6_metrics.csv
-```
-
+Spend heterogeneity does not validate: top-minus-bottom is approximately -$0.485/customer and its 95% interval [-$1.455, $0.461] spans zero. No revenue, profit or ROI improvement is claimed. Bootstrap fractions above zero are descriptive resampling frequencies, not posterior probabilities.
 
 ## Reproduce
 
-1. Install the packages in `requirements.txt`.
-2. Run `python src/causal_experimentation_uplift.py` from the repository root.
-3. The script downloads the public Hillstrom experiment, reruns the balance and treatment-effect analysis, retrains the validation-selected T-learner, and regenerates every published CSV in `results/`.
-4. Because all splits and bootstrap seeds are fixed, the regenerated metrics should match the committed results apart from negligible package-level numerical variation.
+```bash
+pip install -r requirements.txt pytest
+python -m pytest -q
+python src/causal_experimentation_uplift.py
+python audit_policy.py
+```
 
-## What this project demonstrates
+The loader tries the author-hosted URL before the recorded public mirror. The successful 2026-10-09 run used the mirror; payload and parsed-row hashes are retained. CI stores the full scored evaluation records as an artifact and exports all compact result tables together. The published holdout has been inspected and reproduced; subsequent research requires a genuinely new locked evaluation, and this release does not rebrand the rerun as a new independent experiment.
 
-- randomized experimentation and causal interpretation;
-- practical randomization-balance diagnostics;
-- hypothesis testing;
-- multiple-testing correction;
-- bootstrap confidence intervals;
-- distinction between prediction and uplift;
-- honest train/validation/final-test model selection;
-- heterogeneous treatment-effect analysis;
-- preservation of negative findings;
-- business decision-making under uncertainty.
+## Scope
 
-## Limitations
-
-- The binary uplift stage collapses the two email variants and therefore does not model treatment-specific heterogeneity between Men's and Women's Email.
-- T-learner uplift estimates are model-based and should not be interpreted as observed individual causal effects.
-- The 30% targeting threshold is a modeling policy choice, not a proven economically optimal contact rate.
-- No contact cost or customer lifetime value is available, so ROI is not calculated.
-- Bootstrap intervals capture sampling uncertainty, not every source of model-selection uncertainty.
+The policy interval is conditional on the learned ranking and fixed segments; it omits model-refit uncertainty. Pooled email combines two treatment variants. Segment-average causal evidence does not reveal an individual customer’s treatment effect. This public experiment is not client work or production deployment.
