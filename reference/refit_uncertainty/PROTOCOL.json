@@ -1,0 +1,47 @@
+{
+  "study": "Hillstrom fixed-split refit and model-selection sensitivity",
+  "registered_on": "2026-10-10",
+  "base_commit": "96e8b7c497c82dc6c2f6c458c20e7060c47f696e",
+  "status": "retrospective_extension_of_already_inspected_experiment",
+  "source_url": "https://hillstorm1.s3.us-east-2.amazonaws.com/hillstorm_no_indices.csv.gz",
+  "source_payload_sha256": "bab6578f60db5d792f1c2372c502f029152a5249cf5ea84390f3b7f885d7234f",
+  "source_parsed_rows_sha256": "f57d0ec295edfe413cc5ffe7d32fe7443d839cbfaefb4babacc7f80febe96bae",
+  "source_rows": 64000,
+  "unit": "One published customer record; source-order row ID is only a reconstruction key, not an observed customer identifier. Keep duplicate records. Independence between customer records is assumed; household/other clustering is unavailable.",
+  "split": "Reconstruct original binary-email-stratified sklearn train_test_split: evaluation 20%, seed 2026; validation 25% of remaining 80%, seed 2026. Preserve original 38400/12800/12800 role assignments and record order. No re-splitting in replicates.",
+  "candidates": ["Logistic T-learner", "Gradient-boosted T-learner"],
+  "builders": "Import unchanged original make_logistic / make_gradient_boosting; same seven pre-treatment features, preprocessing fitted within each treatment branch; same parameters and fixed boosting random_state 2026. No new features/configurations/budgets/treatment-specific rankers.",
+  "selection": "Greatest validation top-30% minus remaining-70% pooled-email visit effect. Exact metric tie: Logistic T-learner first, matching original candidate insertion order. Evaluation outcomes cannot enter fitting/selection.",
+  "budget": 0.3,
+  "ranking": "Descending predicted uplift; ascending source-order row ID breaks exact score ties. Repeated copies of the same source row use draw position last. Select floor(0.30*n) records. Report boundary ties and comparison with original pandas ordering rather than silently changing legacy results.",
+  "replicates": 256,
+  "conditional_replicates": 4096,
+  "seed": 20261010,
+  "draw_recipe": "For replicate r and role s, numpy.default_rng(SeedSequence([20261010,r,s])). Within each original role independently, resample every actual segment (Mens E-Mail, No E-Mail, Womens E-Mail; sorted lexical order) with replacement to its original count. s=1 training,2 validation,3 evaluation. No outcome stratification. Whole feature/assignment/outcome records travel together. Original roles stay disjoint even when records are duplicated inside one role.",
+  "conditional_seed_role": 4,
+  "paired_modes": [
+    "Original fitted ranking + resampled evaluation (256 common outer draws; also 4096 separate fixed-ranking evaluation draws)",
+    "Original selected family refitted on concatenated resampled training/validation + same resampled evaluation",
+    "Both candidates fitted on resampled training, chosen on resampled validation, winner refitted on concatenated resampled training/validation + same resampled evaluation"
+  ],
+  "fixed_evaluation_sensitivity": "Also evaluate both refitted policies on all original evaluation records to isolate fit/selection variation conditional on these observed outcomes. Do not interpret as out-of-sample-independent repetitions.",
+  "primary_estimator": "Preserve legacy pooled-email gain q*(1-q)*(tau_top-tau_bottom), q=0.30, for visit; tau is treated-minus-control mean within the score-only selected segment. It represents the pooled randomized email mixture, not a treatment-specific allocation policy.",
+  "secondary_estimator": "Known-design Horvitz-Thompson gain mean((selected-q)*(1.5*Y*I(email)-3*Y*I(no email))), with original arm probabilities 1/3 and contacted customers assigned men/women email with probability 1/2 each. Both visit and spend. Same capacity and randomized 30% comparator. This is a separate design-weighted estimate, not a replacement chosen for a favourable answer.",
+  "outcomes": ["visit", "spend"],
+  "preserve": "Legacy conditional +0.009457130314735352 visit gain and inconclusive/negative spend result remain immutable. Report both metrics, all draws, winning-family counts, policy Jaccard/selection frequencies, convergence/failure events and score/tie diagnostics. No dropping failed or adverse replicates.",
+  "reporting": "Full 2.5/50/97.5 percentile sensitivity ranges, not coverage-certified confidence intervals after non-smooth model selection. Report binomial/order-statistic Monte Carlo brackets for both tail quantiles, all 256 replicate records, min/max and nonpositive fractions (descriptive, not posterior probabilities or p-values). No family/interval chosen based on evaluation performance.",
+  "replay_refit_ids": [0, 85, 170, 255],
+  "artifacts": "Pinned source/split identity, unchanged baseline validation and evaluation reconciliation, all outer metrics and bit-packed policies on original and resampled evaluation, conditional replicate metrics, summary, software versions and artifact hashes. Raw full customer dataset stays transient, downloaded by hash-checked collector; no raw-source redistribution or model weights required.",
+  "failure_rule": "Any source/hash/split mismatch, missing treatment arm in a selected group, nonfinite score, convergence warning or replicate failure blocks completion. Save event; diagnose before release. Method changes after registration require an explicit amendment/fresh freeze, with earlier attempt retained. Resume only matching protocol and exact completed replicate identities.",
+  "interpretation_limits": [
+    "One 2008 experiment, one fixed split, observed arm counts and independent-customer assumption; original randomization scheme detail/household clustering unavailable.",
+    "Finite empirical bootstrap, discontinuous capacity/model choice and only 256 full refits; no theorem proving nominal coverage for this pipeline or selection-consistency claim.",
+    "Training/validation membership remains fixed; split uncertainty, new population/time/campaign, researcher-choice and feature/configuration-menu uncertainty are excluded.",
+    "Existing evaluation has already been inspected. Registration precedes this extension's fits, not the original experiment or all knowledge of outcomes. No new untouched holdout, live experiment, individual causal effect, client adoption, profit or ROI claim.",
+    "Do not learn or promote a new policy from evaluation or bootstrap selection frequency. A genuinely new locked experiment is still needed for confirmation."
+  ],
+  "primary_sources": [
+    "https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html",
+    "https://proceedings.neurips.cc/paper/2021/hash/58b7483ba899e0ce4d97ac5eecf6fa99-Abstract.html"
+  ]
+}

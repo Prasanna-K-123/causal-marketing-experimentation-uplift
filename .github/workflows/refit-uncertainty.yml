@@ -1,0 +1,32 @@
+name: Verify registered refit sensitivity
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-refit.txt
+      - run: pip install -r requirements-refit.txt
+      - run: python -m pytest -q
+      - name: Reconstruct source, all draws/metrics, and four registered refits
+        if: hashFiles('reference/refit_uncertainty/artifact_manifest.json') != ''
+        run: |
+          python collect_refit_source.py
+          python verify_refit_uncertainty.py --refit-check
+      - name: Registration has no completed data study yet
+        if: hashFiles('reference/refit_uncertainty/artifact_manifest.json') == ''
+        run: echo 'Code/tests only; source/refit evidence replay intentionally not run before completed release.'
