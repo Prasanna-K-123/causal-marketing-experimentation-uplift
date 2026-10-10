@@ -1,0 +1,71 @@
+{
+  "registered_commit": "1ae042393950d130d81020c20e94f0da89859b7e",
+  "registered_tree": "77e54263def4bc34b456332de5dcddbd3224132b",
+  "base_commit": "96e8b7c497c82dc6c2f6c458c20e7060c47f696e",
+  "protocol_sha256": "ddcbeecdb1ac9ffb693df73ea7cf2970e3744e4c10d355b8e9e849cfc192c55d",
+  "remote_registered_paths_verified": 9,
+  "method_files": [
+    {
+      "path": ".gitignore",
+      "sha256": "345d026cb03f90fc9c8932ff27ff1ecff169783153006be926465d2193da06ba",
+      "git_sha": "b549dbc3331704d4906576ed71bd7ba760912b57",
+      "bytes": 47
+    },
+    {
+      "path": "src/refit_uncertainty.py",
+      "sha256": "2e4b69d408ab7ca3af91d7f1b5eccc9793fa4f11d2a55fd70d375873d111ad32",
+      "git_sha": "6e8b45481c63f619bd9f200de5da908567e61538",
+      "bytes": 11649
+    },
+    {
+      "path": "collect_refit_source.py",
+      "sha256": "eed5f6f6c244f4be1cfda0ea7f55ac38e076b68df2e99f2037894ca8c75412b2",
+      "git_sha": "979df043b73922d7a9ff61e1be70185f834e7312",
+      "bytes": 1442
+    },
+    {
+      "path": "benchmark_refit_uncertainty.py",
+      "sha256": "bb0c72af0a30642b682f9e058b222aea1205cdec7913be539a2dc57a96f51cea",
+      "git_sha": "bfc46b4763cdcd42882fc423496af946656f47fd",
+      "bytes": 5946
+    },
+    {
+      "path": "verify_refit_uncertainty.py",
+      "sha256": "e8fa4d95172bfa911e222e4dc5d1becf1f5e474a3306241526f2a331b1ebca3d",
+      "git_sha": "f39eaaacf2b0b79286f5d1d3277f05719467862e",
+      "bytes": 7589
+    },
+    {
+      "path": "tests/test_refit_uncertainty.py",
+      "sha256": "09d51e789d4c2bb52d4c99c432fb57fe93ce324bba80c0a7c391174ab82d3a3f",
+      "git_sha": "283e202cf5e4a3b442ff0422211d3046083b5956",
+      "bytes": 4908
+    },
+    {
+      "path": "requirements-refit.txt",
+      "sha256": "e617a99c96948afdf76f59a11721007a95ade443fc1772999ab78e28049f5062",
+      "git_sha": "188ffd5cf786ee023db99643d4eb328e588b89e5",
+      "bytes": 112
+    },
+    {
+      "path": ".github/workflows/refit-uncertainty.yml",
+      "sha256": "e795d427e3be4a5268d3874c6292e126d5cee927672f6794af9eb0790deca30a",
+      "git_sha": "14b75fdb1ebec56f163b97c9ba70ad7fe3c052d3",
+      "bytes": 1105
+    },
+    {
+      "path": "reference/refit_uncertainty/PROTOCOL.json",
+      "sha256": "ddcbeecdb1ac9ffb693df73ea7cf2970e3744e4c10d355b8e9e849cfc192c55d",
+      "git_sha": "fc3130f7a451a227a7e80e46bba133cc499747b6",
+      "bytes": 6703
+    },
+    {
+      "path": "src/causal_experimentation_uplift.py",
+      "sha256": "8ae6276ed1f5b6b97f69b303ad8a72bc8d12b88fda75e11bf117c8bde2e3a7cb",
+      "git_sha": "81808d890d8be8989478875c2e4c86901ac8cc34",
+      "bytes": 17408,
+      "identity": "Unchanged source at registered base commit"
+    }
+  ],
+  "disclosure": "Source/order and original evaluation were already known. New source download and this extension's real fits begin only after this remote freeze; no fresh untouched evaluation is claimed."
+}

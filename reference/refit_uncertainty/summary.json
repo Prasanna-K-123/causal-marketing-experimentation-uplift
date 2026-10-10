@@ -1,0 +1,964 @@
+{
+  "protocol_sha256": "ddcbeecdb1ac9ffb693df73ea7cf2970e3744e4c10d355b8e9e849cfc192c55d",
+  "base_commit": "96e8b7c497c82dc6c2f6c458c20e7060c47f696e",
+  "outer_replicates": 256,
+  "conditional_replicates": 4096,
+  "baseline": {
+    "validation": {
+      "Logistic T-learner": 0.03271821498830588,
+      "Gradient-boosted T-learner": 0.024479252359559098
+    },
+    "selected": "Logistic T-learner",
+    "evaluation": {
+      "visit_top": 0.08283799349699394,
+      "visit_bottom": 0.03780403961730179,
+      "visit_gain": 0.009457130314735352,
+      "visit_ipw_gain": 0.008742187499999996,
+      "spend_top": -0.05157411142594692,
+      "spend_bottom": 0.4335735342094763,
+      "spend_gain": -0.10188100558343888,
+      "spend_ipw_gain": -0.10606230468750001
+    },
+    "legacy_order_evaluation": {
+      "visit_top": 0.08283799349699394,
+      "visit_bottom": 0.03780403961730179,
+      "visit_gain": 0.009457130314735352,
+      "visit_ipw_gain": 0.008742187499999996,
+      "spend_top": -0.05157411142594692,
+      "spend_bottom": 0.4335735342094763,
+      "spend_gain": -0.10188100558343888,
+      "spend_ipw_gain": -0.10606230468750001
+    },
+    "policy_disagreements_with_legacy_order": 0,
+    "boundary_equal_scores": 1
+  },
+  "selection_counts": {
+    "Logistic T-learner": 143,
+    "Gradient-boosted T-learner": 113
+  },
+  "ranges": {
+    "conditional_visit_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.003091918507826267,
+        0.009517911904731152,
+        0.015367670775320719
+      ],
+      "min": -0.0016702726985601299,
+      "max": 0.019328225212453677,
+      "fraction_nonpositive": 0.00390625,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            0.00016158023733253826,
+            0.004383296391973693
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.014591003789426783,
+            0.01754652347662886
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "conditional_visit_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.0022705078124999976,
+        0.008917968749999998,
+        0.015908203125
+      ],
+      "min": -0.0019570312499999996,
+      "max": 0.020777343749999996,
+      "fraction_nonpositive": 0.00390625,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            0.00026953124999999964,
+            0.0028007812499999986
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.014414062499999998,
+            0.018433593749999998
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "conditional_spend_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.28829323249555816,
+        -0.10045496949946456,
+        0.07292140731882882
+      ],
+      "min": -0.39220400291797286,
+      "max": 0.14647719656880726,
+      "fraction_nonpositive": 0.8125,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.34125525954722347,
+            -0.27671039309435075
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.04972355099536053,
+            0.14149242519438343
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "conditional_spend_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.29427474609375004,
+        -0.10465769531250005,
+        0.06592441406249999
+      ],
+      "min": -0.4052600390625,
+      "max": 0.14701722656249994,
+      "fraction_nonpositive": 0.828125,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.3490426171875,
+            -0.272170078125
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.052718085937499964,
+            0.14336249999999995
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "fixed_refit_visit_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.0007661951934256686,
+        0.00680167437653024,
+        0.013936485590046437
+      ],
+      "min": -0.0030384641592749377,
+      "max": 0.017377924947138083,
+      "fraction_nonpositive": 0.01953125,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.0029165798090390613,
+            0.0012992881397492465
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.012757848661503179,
+            0.01609896813880711
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "fixed_refit_visit_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.0010957031250000008,
+        0.006046874999999998,
+        0.013649414062499997
+      ],
+      "min": -0.004417968750000001,
+      "max": 0.017683593749999994,
+      "fraction_nonpositive": 0.0390625,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.0036679687500000002,
+            0.000562499999999998
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.012316406249999998,
+            0.016277343749999996
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "fixed_refit_spend_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.26641209065919436,
+        -0.04133800295606005,
+        0.21335136218643475
+      ],
+      "min": -0.3757353210713773,
+      "max": 0.34873738709158186,
+      "fraction_nonpositive": 0.671875,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.326025749306829,
+            -0.2496274546684
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.15051404635071644,
+            0.2877625340474832
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "fixed_refit_spend_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.27965447753906253,
+        -0.05298111328125002,
+        0.21396169921875
+      ],
+      "min": -0.3892086328125,
+      "max": 0.33539050781249996,
+      "fraction_nonpositive": 0.6796875,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.33581015625,
+            -0.255517265625
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.1519696875,
+            0.28833363281249996
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_visit_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.0025225425991685355,
+        0.006303262165361525,
+        0.012618965993392992
+      ],
+      "min": -0.00680324800568506,
+      "max": 0.015455619832966946,
+      "fraction_nonpositive": 0.0625,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.0046652690885139025,
+            -0.0003280957139541583
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.011811584836274439,
+            0.0141700740572444
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_visit_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.0023305664062500003,
+        0.0059296874999999975,
+        0.01325537109375
+      ],
+      "min": -0.00767578125,
+      "max": 0.015855468749999997,
+      "fraction_nonpositive": 0.0625,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.004417968750000001,
+            -0.001066406250000001
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.011707031249999998,
+            0.015644531249999996
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_spend_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.2785566215193347,
+        -0.05373493444120858,
+        0.17225662286161822
+      ],
+      "min": -0.37675373909942,
+      "max": 0.34873738709158186,
+      "fraction_nonpositive": 0.67578125,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.34408116891846846,
+            -0.26087646114745
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.1462370353312662,
+            0.2965325081964307
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_spend_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.28000240722656256,
+        -0.05363812500000001,
+        0.1790503271484375
+      ],
+      "min": -0.378999140625,
+      "max": 0.33539050781249996,
+      "fraction_nonpositive": 0.69140625,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.3425030859375,
+            -0.2619526171875
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.14084578124999997,
+            0.300387890625
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "fixed_refit_original_visit_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.0027805223603217456,
+        0.0067784182890412185,
+        0.010602334473495735
+      ],
+      "min": 0.001508355801562932,
+      "max": 0.01262097589550173,
+      "fraction_nonpositive": 0.0,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            0.0021061781345822527,
+            0.0037299439152776712
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.01009810029020491,
+            0.012330307676520902
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "fixed_refit_original_visit_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.0020478515624999982,
+        0.006164062499999997,
+        0.010104492187499998
+      ],
+      "min": 7.031249999999822e-05,
+      "max": 0.011789062499999996,
+      "fraction_nonpositive": 0.0,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            0.0006562499999999974,
+            0.0028828124999999982
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.009562499999999996,
+            0.011320312499999995
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "fixed_refit_original_spend_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.1582611631373795,
+        -0.04728027373200558,
+        0.08001737592555377
+      ],
+      "min": -0.20360380381016605,
+      "max": 0.1114717239820872,
+      "fraction_nonpositive": 0.7890625,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.1865901514802488,
+            -0.14646198646376077
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.0581174638966628,
+            0.10772194251108111
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "fixed_refit_original_spend_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.16283027343750003,
+        -0.05116230468750003,
+        0.07592915039062496
+      ],
+      "min": -0.2126736328125,
+      "max": 0.1070009765625,
+      "fraction_nonpositive": 0.796875,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.19845996093749999,
+            -0.1531271484375
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.059991210937499984,
+            0.10411347656249997
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_original_visit_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.0011392220822116239,
+        0.006228285039466558,
+        0.010298070147242867
+      ],
+      "min": -0.0020863330270663484,
+      "max": 0.012330307676520902,
+      "fraction_nonpositive": 0.01171875,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.0018268249119127267,
+            0.0018165253509798427
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.009944754486598545,
+            0.011007303367337918
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_original_visit_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.0006562499999999977,
+        0.0060468749999999976,
+        0.010338867187499996
+      ],
+      "min": -0.002156250000000001,
+      "max": 0.011789062499999996,
+      "fraction_nonpositive": 0.01171875,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.0008671875000000023,
+            0.0015937499999999986
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.009796874999999997,
+            0.011320312499999995
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_original_spend_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.18530389434453268,
+        -0.04045308731663083,
+        0.07815476108412574
+      ],
+      "min": -0.30871481540417095,
+      "max": 0.16291196601763813,
+      "fraction_nonpositive": 0.7421875,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.29085475971216274,
+            -0.15841914008667568
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.06724567322919307,
+            0.1256406094981391
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_original_spend_ipw_gain": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        -0.19233090820312498,
+        -0.043282617187500025,
+        0.07697504882812498
+      ],
+      "min": -0.3084591796875,
+      "max": 0.15367207031249996,
+      "fraction_nonpositive": 0.75390625,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            -0.29065605468749994,
+            -0.15701425781249997
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.06681855468749999,
+            0.1301185546875
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    }
+  },
+  "fixed_ranking_4096": {
+    "visit_gain": {
+      "replicates": 4096,
+      "percentiles_2_5_50_97_5": [
+        0.0038568627507177392,
+        0.009679163808707595,
+        0.01592284791230377
+      ],
+      "min": -0.0016898371672917454,
+      "max": 0.022554315382944962,
+      "fraction_nonpositive": 0.000732421875,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            83,
+            123
+          ],
+          "metric_range": [
+            0.0036104914330701123,
+            0.0040180267415575645
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            3974,
+            4014
+          ],
+          "metric_range": [
+            0.015659856186677357,
+            0.016254359669582014
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "visit_ipw_gain": {
+      "replicates": 4096,
+      "percentiles_2_5_50_97_5": [
+        0.002711425781249998,
+        0.008964843749999998,
+        0.015631347656249996
+      ],
+      "min": -0.0023085937499999986,
+      "max": 0.023320312499999992,
+      "fraction_nonpositive": 0.002685546875,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            83,
+            123
+          ],
+          "metric_range": [
+            0.0023906249999999974,
+            0.0028945312499999987
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            3974,
+            4014
+          ],
+          "metric_range": [
+            0.015222656249999997,
+            0.015937499999999997
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "spend_gain": {
+      "replicates": 4096,
+      "percentiles_2_5_50_97_5": [
+        -0.30948735072893396,
+        -0.10086489540451463,
+        0.0893396054310961
+      ],
+      "min": -0.543710181190056,
+      "max": 0.21530202563904594,
+      "fraction_nonpositive": 0.833251953125,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            83,
+            123
+          ],
+          "metric_range": [
+            -0.32086028670455424,
+            -0.2986846350450729
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            3974,
+            4014
+          ],
+          "metric_range": [
+            0.0841818225958924,
+            0.09818078511294415
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "spend_ipw_gain": {
+      "replicates": 4096,
+      "percentiles_2_5_50_97_5": [
+        -0.316140380859375,
+        -0.10518556640625001,
+        0.08525071289062494
+      ],
+      "min": -0.554274140625,
+      "max": 0.21081691406249994,
+      "fraction_nonpositive": 0.84375,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            83,
+            123
+          ],
+          "metric_range": [
+            -0.3253528125,
+            -0.30676136718749997
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            3974,
+            4014
+          ],
+          "metric_range": [
+            0.08020078124999996,
+            0.09222257812499997
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    }
+  },
+  "policy_jaccard": {
+    "fixed_refit_jaccard": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.49271137026239065,
+        0.6406751443060713,
+        0.780773595177093
+      ],
+      "min": 0.4275092936802974,
+      "max": 0.893491124260355,
+      "fraction_nonpositive": 0.0,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            0.4395501405810684,
+            0.4994142912924639
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.7626807436309387,
+            0.8066337332392378
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    },
+    "reselect_refit_jaccard": {
+      "replicates": 256,
+      "percentiles_2_5_50_97_5": [
+        0.3470730491609592,
+        0.5272969737524307,
+        0.7519794822882078
+      ],
+      "min": 0.2855708068295949,
+      "max": 0.893491124260355,
+      "fraction_nonpositive": 0.0,
+      "tail_monte_carlo_brackets_95": {
+        "0.025": {
+          "one_based_order_indices": [
+            2,
+            13
+          ],
+          "metric_range": [
+            0.29664021610670266,
+            0.36001416681423765
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        },
+        "0.975": {
+          "one_based_order_indices": [
+            244,
+            255
+          ],
+          "metric_range": [
+            0.7293402386849809,
+            0.8066337332392378
+          ],
+          "interpretation": "Binomial order-statistic Monte Carlo bracket; not a second population confidence interval."
+        }
+      }
+    }
+  },
+  "failed_replicates": 0,
+  "interval_type": "Empirical percentile sensitivity ranges, conditional on registered assumptions. Nominal frequentist coverage after selection is not established.",
+  "caveats": [
+    "One 2008 experiment, one fixed split, observed arm counts and independent-customer assumption; original randomization scheme detail/household clustering unavailable.",
+    "Finite empirical bootstrap, discontinuous capacity/model choice and only 256 full refits; no theorem proving nominal coverage for this pipeline or selection-consistency claim.",
+    "Training/validation membership remains fixed; split uncertainty, new population/time/campaign, researcher-choice and feature/configuration-menu uncertainty are excluded.",
+    "Existing evaluation has already been inspected. Registration precedes this extension's fits, not the original experiment or all knowledge of outcomes. No new untouched holdout, live experiment, individual causal effect, client adoption, profit or ROI claim.",
+    "Do not learn or promote a new policy from evaluation or bootstrap selection frequency. A genuinely new locked experiment is still needed for confirmation."
+  ]
+}

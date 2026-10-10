@@ -1,0 +1,100 @@
+{
+  "protocol_sha256": "ddcbeecdb1ac9ffb693df73ea7cf2970e3744e4c10d355b8e9e849cfc192c55d",
+  "files": [
+    {
+      "path": ".github/workflows/refit-uncertainty.yml",
+      "bytes": 1105,
+      "sha256": "e795d427e3be4a5268d3874c6292e126d5cee927672f6794af9eb0790deca30a"
+    },
+    {
+      "path": "benchmark_refit_uncertainty.py",
+      "bytes": 5946,
+      "sha256": "bb0c72af0a30642b682f9e058b222aea1205cdec7913be539a2dc57a96f51cea"
+    },
+    {
+      "path": "collect_refit_source.py",
+      "bytes": 1442,
+      "sha256": "eed5f6f6c244f4be1cfda0ea7f55ac38e076b68df2e99f2037894ca8c75412b2"
+    },
+    {
+      "path": "reference/refit_uncertainty/PROTOCOL.json",
+      "bytes": 6703,
+      "sha256": "ddcbeecdb1ac9ffb693df73ea7cf2970e3744e4c10d355b8e9e849cfc192c55d"
+    },
+    {
+      "path": "reference/refit_uncertainty/baseline.json",
+      "bytes": 950,
+      "sha256": "c2d76bc2eed40eca5a04bea0fee8c69d038a83ee244c8649b17d7002272efbc9"
+    },
+    {
+      "path": "reference/refit_uncertainty/baseline_evaluation_predictions.csv.gz",
+      "bytes": 176467,
+      "sha256": "f2727ef1b5286d19eedfbb52dfff3bf01f6badf498b17390a71b65e42becfef9"
+    },
+    {
+      "path": "reference/refit_uncertainty/conditional_replicates.csv",
+      "bytes": 704781,
+      "sha256": "82f91fbe33af37be65cf5243ea56dcdb15c5b5aed5c25e2a538830b8af8ebe44"
+    },
+    {
+      "path": "reference/refit_uncertainty/environment.json",
+      "bytes": 379,
+      "sha256": "cfafa0de9dd19b4647c101d70305a403586622bad8e89064f34385b7a2871ab4"
+    },
+    {
+      "path": "reference/refit_uncertainty/policy_membership.npz",
+      "bytes": 1089050,
+      "sha256": "5e365542acac0f297aa795ef81af8693a5c73cb7399321bd19b9395661a16518"
+    },
+    {
+      "path": "reference/refit_uncertainty/registration_receipt.json",
+      "bytes": 2862,
+      "sha256": "a3d2a3528db4a0f0d913bf5f6e9066c2109eeb98877d34ba2248dcb841b0d38a"
+    },
+    {
+      "path": "reference/refit_uncertainty/replicates.csv",
+      "bytes": 327629,
+      "sha256": "bfb3e611b29fd5c0834ca334e0e7ce430bf762c2a61303fc421581284f1cfd8b"
+    },
+    {
+      "path": "reference/refit_uncertainty/selection_frequency.csv.gz",
+      "bytes": 77102,
+      "sha256": "719e25c82b6eb2f53655cd62cd53e86638fba0190c0ce5c81604550b1697263c"
+    },
+    {
+      "path": "reference/refit_uncertainty/source_receipt.json",
+      "bytes": 628,
+      "sha256": "37b70b8af9b716a08028f0b89ad75a37fc974fa09d381f5a44c98e1a02ba4081"
+    },
+    {
+      "path": "reference/refit_uncertainty/split_assignments.csv.gz",
+      "bytes": 384897,
+      "sha256": "1932389c823a21c2045f785fe02b5ed3acdcf3d55d2732651797e86bf05a1518"
+    },
+    {
+      "path": "reference/refit_uncertainty/summary.json",
+      "bytes": 29555,
+      "sha256": "a31e3909472690cfc207dc17535ec451e3403e1f0d3ba7feb9b1e031d8a2db0a"
+    },
+    {
+      "path": "requirements-refit.txt",
+      "bytes": 112,
+      "sha256": "e617a99c96948afdf76f59a11721007a95ade443fc1772999ab78e28049f5062"
+    },
+    {
+      "path": "src/refit_uncertainty.py",
+      "bytes": 11649,
+      "sha256": "2e4b69d408ab7ca3af91d7f1b5eccc9793fa4f11d2a55fd70d375873d111ad32"
+    },
+    {
+      "path": "tests/test_refit_uncertainty.py",
+      "bytes": 4908,
+      "sha256": "09d51e789d4c2bb52d4c99c432fb57fe93ce324bba80c0a7c391174ab82d3a3f"
+    },
+    {
+      "path": "verify_refit_uncertainty.py",
+      "bytes": 7589,
+      "sha256": "e8fa4d95172bfa911e222e4dc5d1becf1f5e474a3306241526f2a331b1ebca3d"
+    }
+  ]
+}

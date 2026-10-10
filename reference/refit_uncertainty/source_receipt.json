@@ -1,0 +1,15 @@
+{
+  "source_url": "https://hillstorm1.s3.us-east-2.amazonaws.com/hillstorm_no_indices.csv.gz",
+  "payload_sha256": "bab6578f60db5d792f1c2372c502f029152a5249cf5ea84390f3b7f885d7234f",
+  "payload_bytes": 443070,
+  "rows": 64000,
+  "parsed_rows_sha256": "f57d0ec295edfe413cc5ffe7d32fe7443d839cbfaefb4babacc7f80febe96bae",
+  "arm_counts": {
+    "Womens E-Mail": 21387,
+    "Mens E-Mail": 21307,
+    "No E-Mail": 21306
+  },
+  "exact_duplicate_records_retained": 6562,
+  "customer_identifier": "Unavailable; source-order key is not identity",
+  "source_terms": "Public challenge data; raw dataset not redistributed in this release"
+}
