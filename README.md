@@ -45,3 +45,11 @@ The loader tries the author-hosted URL before the recorded public mirror. The su
 ## Scope
 
 The historical policy interval is conditional on the learned ranking and fixed segments; the separate registered extension propagates fixed-split refit/selection variation with the explicit limits above. Pooled email combines two treatment variants. Segment-average causal evidence does not reveal an individual customer’s treatment effect. This public experiment is not client work or production deployment.
+
+## Licence and source terms
+
+Original code and original project documentation are available under the
+[MIT licence](LICENSE). Third-party data, report excerpts, benchmark records and
+model weights retain their own terms; see [source rights and attribution](NOTICE.md).
+The code licence does not grant additional rights in those sources or establish
+professional, regulatory or production approval of the research.
